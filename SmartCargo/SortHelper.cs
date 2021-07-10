@@ -125,15 +125,16 @@ namespace SmartCargo
         private static void OutputSortedResult(string[][] cargos)
         {
             Console.WriteLine("Результат обработки информации:");
-            Console.WriteLine("Название   Вес   Дата отправки   Дата доставки   Уровень важности   Признак архивности");
+            Console.WriteLine("{0,25}   {1,25}   {2,25}   {3,25}   {4,25}   {5,25}   ",
+                "Название", "Вес", "Дата отправки", "Дата доставки", "Уровень важности", "Признак архивности");
 
             foreach (var cargo in cargos)
             {
                 foreach (var param in cargo)
                 {
-                    Console.Write(param + "   ");
+                    Console.Write("{0,25}   ", param);
                 }
-                Console.WriteLine(" ");
+                Console.WriteLine("");
             }
         }
     }

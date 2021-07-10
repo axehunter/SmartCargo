@@ -6,6 +6,7 @@ namespace SmartCargo
     {
         public static void Main()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             var cargoInfo = Entering.CargoInfo();
             var unsortedСargos = SplitByParams(cargoInfo);
             var sortParam = Entering.ParamForSort();
@@ -35,15 +36,14 @@ namespace SmartCargo
         {
             string[][] unsortedСargos = new string[cargoInfo.Count][];
             int index = 0;
-            foreach (var item in cargoInfo)
+            foreach (var line in cargoInfo)
             {
-                if (item == "")
+                if (line == "")
                     continue;
-                string[] param = item.Split(new[] { ';' });
+                string[] param = line.Split(new[] { ';' });
                 unsortedСargos[index] = param;
                 index++;
             }
-
             return unsortedСargos;
         }
     }

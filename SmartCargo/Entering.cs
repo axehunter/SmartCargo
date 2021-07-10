@@ -9,23 +9,43 @@ namespace SmartCargo
     {
         public static string SortOrder()
         {
-            Console.WriteLine("Введите порядок сортировки: ASC, DESC");
-            var sortingOrder = Console.ReadLine()?.ToUpper();
-            return sortingOrder;
+            while (true)
+            {
+                Console.WriteLine("Введите порядок сортировки: ASC, DESC");
+                var sortingOrder = Console.ReadLine()?.ToUpper();
+                string[] sortParams = {"ASC", "DESC"};
+                if (!sortParams.Contains(sortingOrder))
+                {
+                    Console.WriteLine("Порядок сортировки введен не верно.");
+                    continue;
+                }
+                return sortingOrder;
+            }
         }
 
         public static string ParamForSort()
         {
-            Console.WriteLine("Введите название параметра, по которому необходимо отсортировать. Возможные значения:");
-            string[] cargoParams = { "NAME", "WEIGHT", "DATE_BEGIN", "DATE_END", "IMPORTANCE_LEVEL" };
-            for (int i = 0; i < cargoParams.Length; i++)
-                Console.WriteLine(cargoParams[i] + " ");
-            var sortParam = Console.ReadLine()?.ToUpper();
-            return sortParam;
+            while (true)
+            {
+                Console.WriteLine("Введите название параметра, по которому необходимо отсортировать. Возможные значения:");
+                string[] cargoParams = { "NAME", "WEIGHT", "DATE_BEGIN", "DATE_END", "IMPORTANCE_LEVEL" };
+                for (int i = 0; i < cargoParams.Length; i++)
+                    Console.Write(cargoParams[i] + "   ");
+                Console.WriteLine("");
+                var sortParam = Console.ReadLine()?.ToUpper();
+
+                if (!cargoParams.Contains(sortParam))
+                {
+                    Console.WriteLine("Название параметра введено не верно.");
+                    continue;
+                }
+                return sortParam;
+            }
         }
 
         public static List<string> CargoInfo()
         {
+            Console.BufferWidth = 250;
             Console.WriteLine(
                 "Введите необходимую информацию о грузах — через ; без пробелов. Если вы закончили, введите слово END.");
 
@@ -71,7 +91,9 @@ namespace SmartCargo
 
             try
             {
+                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                 DateTime.ParseExact(param[2], "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                 DateTime.ParseExact(param[3], "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
             }
             catch
